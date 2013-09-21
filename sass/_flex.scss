@@ -1,0 +1,44 @@
+// Borrowed from github.com/Freddy03h/compass-flex/blob/master/lib/_flex.scss
+// and stripped down to only new flex rules (no box).
+
+@import "compass/css3/shared";
+
+$flexbox-2013-support: -moz, -webkit, -o, -ms, not -khtml, official;
+
+@mixin display-flex{
+  @include experimental-value(display, flex, $flexbox-2013-support...);
+}
+
+@mixin display-inline-flex{
+  @include experimental-value(display, inline-flex, $flexbox-2013-support...);
+}
+
+@mixin flex($flex: $default-box-flex) {
+  $flex: unquote($flex);
+  @include experimental(flex, $flex, $flexbox-2013-support...);
+}
+
+@mixin order($group: $default-ordinal-flex-group) {
+  $group: unquote($group);
+  @include experimental(order, $group, $flexbox-2013-support...);
+}
+
+@mixin flex-direction($orientation: $default-box-orient) {
+  $orientation: unquote($orientation);
+  @include experimental(flex-direction, $orientation, $flexbox-2013-support...);
+}
+
+@mixin flex-wrap($wrap) {
+  $wrap: unquote($wrap);
+  @include experimental(flex-wrap, $wrap, $flexbox-2013-support...);
+}
+
+@mixin justify-content($pack: $default-box-pack) {
+  $pack: unquote($pack);
+  @include experimental(justify-content, $pack, $flexbox-2013-support...);
+}
+
+@mixin align-items($alignment: $default-box-align) {
+  $alignment: unquote($alignment);
+  @include experimental(align-items, $alignment, $flexbox-2013-support...);
+}

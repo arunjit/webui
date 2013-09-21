@@ -1,0 +1,141 @@
+@import "compass/css3";
+@import "compass/css3/user-interface";
+@import "flex";
+@import "vars";
+
+$controlHeight: 27px;
+$btnColorChange: 2%;
+
+@mixin blueFocus() {
+  &:focus {
+    border-color: $blue;
+    outline: 4px solid #c2daff;
+  }
+}
+
+.buttonbar {
+  @include display-flex();
+  @include flex-direction(row);
+  @include align-items(center);
+  height: $controlHeight;
+
+  button {
+    margin-right: 10px;
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+}
+
+button, input {
+  display: inline-block;
+}
+
+button {
+  @include border-radius(2px);
+  background-color: $grayLightest;
+  border: 1px solid $grayLight;
+  color: $grayDarker;
+  font-size: 0.8em;
+  font-weight: 700;
+  line-height: 27px;
+  min-width: 70px;
+  padding: 0 15px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  @include user-select(none);
+
+  &.disabled, &:disabled {
+    opacity: 0.5;
+  }
+
+  @include blueFocus();
+
+  &:not(.disabled):not(:disabled) {
+    &:focus, &:hover {
+      background-color: lighten($grayLightest, $btnColorChange);
+    }
+    &:active {
+      background-color: darken($grayLightest, $btnColorChange);
+    }
+  }
+
+  &.submit {
+    background-color: $blue;
+    border-color: darken($blue, 5%);
+    color: $white;
+
+    &:not(.disabled):not(:disabled) {
+      &:focus, &:hover {
+        background-color: lighten($blue, $btnColorChange);
+      }
+      &:active {
+        background-color: darken($blue, $btnColorChange);
+      }
+    }
+  }
+}
+
+input {
+  border: 1px solid $lineColor;
+  font-size: inherit;
+  line-height: $controlHeight - 4px;
+  padding: 2px;
+
+  &:focus {
+    border-color: $blue;
+    outline: none;
+  }
+}
+
+input[type="checkbox"], input[type="radio"] {
+  @include appearance(none);
+  background-color: $white;
+  border: 1px solid $altGrayBorder;
+  height: 16px;
+  margin: 0;
+  padding: 0;
+  width: 16px;
+  position: relative;
+
+  &:not(.disabled):not(:disabled) {
+    &:focus, &:hover {
+      background-color: $grayLightest;
+      @include box-shadow(inset 0 1px 1px $shadow1);
+    }
+    &:active {
+      background-color: $grayLighter;
+    }
+  }
+
+  @include blueFocus();
+
+  & + label {
+    margin-left: 4px;
+    padding: 4px 0;
+  }
+}
+
+input[type="radio"] {
+  @include border-radius(50%);
+}
+
+input[type="checkbox"]:checked::after {
+  content: $checkboxImage;
+  display: block;
+  left: -5px;
+  position: absolute;
+  top: -3px;
+}
+
+input[type="radio"]:checked::after {
+  content: '';
+  background-color: rgba(0, 0, 0, 0.5);
+  @include border-radius(50%);
+  display: block;
+  height: 8px;
+  margin: 3px auto;
+  width: 8px;
+}
