@@ -1,6 +1,5 @@
 @import "compass/css3";
 @import "compass/css3/user-interface";
-@import "compass/utilities/color/contrast";
 @import "flex";
 @import "vars";
 
@@ -45,20 +44,22 @@ button, input {
   display: inline-block;
 }
 
-$btnBorderDelta:      15%;
-$btnBgDelta:          7%;
+@mixin buttonEffects($baseColor: $grayDarker) {
+  $btnEfColor: scale-saturation($baseColor, 20%);
+  $btnEfBgColor: scale-lightness($baseColor, 85%);
+  $btnEfBgColorH: scale-lightness($baseColor, 65%);
 
-@mixin buttonEffects($bgColor: $grayLightest) {
-  @include contrasted($bgColor, $grayDarker, $white, 65%);
-  border: 1px solid darken($bgColor, $btnBorderDelta);
+  background-color: $btnEfBgColor;
+  border: 1px solid $btnEfColor;
+  color: $btnEfColor;
 
   &:not(.disabled):not(:disabled) {
     &:focus, &:hover {
-      background-color: lighten($bgColor, $btnBgDelta);
+      background-color: $btnEfBgColorH;
       outline: none;
     }
     &:active {
-      background-color: darken($bgColor, $btnBgDelta);
+      background-color: $btnEfBgColor;
     }
   }
 }
