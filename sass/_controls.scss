@@ -10,7 +10,7 @@ $controlHeight:       27px !default;
 %control {
   font-family: 'Roboto', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 500;
   line-height: $controlHeight;
   text-transform: uppercase;
 
@@ -45,11 +45,11 @@ button, input {
   display: inline-block;
 }
 
-$btnBorderDelta:      5%;
-$btnBgDelta:          2%;
+$btnBorderDelta:      15%;
+$btnBgDelta:          7%;
 
 @mixin buttonEffects($bgColor: $grayLightest) {
-  @include contrasted($bgColor, $white, $grayDarker, 35%);
+  @include contrasted($bgColor, $grayDarker, $white, 65%);
   border: 1px solid darken($bgColor, $btnBorderDelta);
 
   &:not(.disabled):not(:disabled) {
@@ -63,9 +63,10 @@ $btnBgDelta:          2%;
 }
 
 %button {
-  @extend .control;
+  @extend %control;
   @include border-radius(2px);
   @include user-select(none);
+  cursor: pointer;
   min-width: 70px;
   padding: 0 15px;
   text-align: center;
@@ -73,7 +74,7 @@ $btnBgDelta:          2%;
 }
 
 button {
-  @extend .button;
+  @extend %button;
   @include buttonEffects();
 }
 
