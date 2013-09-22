@@ -1,17 +1,30 @@
 @import "compass/css3";
 @import "compass/css3/user-interface";
+@import "compass/utilities/color/contrast";
 @import "flex";
 @import "vars";
 
-$controlHeight: 27px;
-$btnColorChange: 2%;
+$controlFontSize:     13px !default;
+$controlHeight:       27px !default;
 
-@mixin blueFocus() {
-  &:focus {
-    border-color: $blue;
-    outline: 4px solid #c2daff;
+%control {
+  font-family: 'Roboto', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: $controlHeight;
+  text-transform: uppercase;
+
+  &.disabled, &:disabled {
+    opacity: 0.5;
   }
 }
+
+// @mixin blueFocus() {
+//   &:focus {
+//     border-color: $blue;
+//     outline: 4px solid #c2daff;
+//   }
+// }
 
 .buttonbar {
   @include display-flex();
@@ -32,50 +45,52 @@ button, input {
   display: inline-block;
 }
 
-button {
+$btnBorderDelta:      5%;
+$btnBgDelta:          2%;
+
+@mixin buttonEffects($bgColor: $grayLightest) {
+  @include contrasted($bgColor, $white, $grayDarker, 35%);
+  border: 1px solid darken($bgColor, $btnBorderDelta);
+
+  &:not(.disabled):not(:disabled) {
+    &:focus, &:hover {
+      background-color: lighten($bgColor, $btnBgDelta);
+    }
+    &:active {
+      background-color: darken($bgColor, $btnBgDelta);
+    }
+  }
+}
+
+%button {
+  @extend .control;
   @include border-radius(2px);
-  background-color: $grayLightest;
-  border: 1px solid $grayLight;
-  color: $grayDarker;
-  font-size: 0.8em;
-  font-weight: 700;
-  line-height: 27px;
+  @include user-select(none);
   min-width: 70px;
   padding: 0 15px;
   text-align: center;
   text-decoration: none;
-  text-transform: uppercase;
-  @include user-select(none);
+}
 
-  &.disabled, &:disabled {
-    opacity: 0.5;
-  }
+button {
+  @extend .button;
+  @include buttonEffects();
+}
 
-  @include blueFocus();
+button.action {
+  @extend .button;
+  @include buttonEffects($blue);
+}
 
-  &:not(.disabled):not(:disabled) {
-    &:focus, &:hover {
-      background-color: lighten($grayLightest, $btnColorChange);
-    }
-    &:active {
-      background-color: darken($grayLightest, $btnColorChange);
-    }
-  }
+button.primary {
+  @extend .button;
+  @include buttonEffects($red);
+}
 
-  &.submit {
-    background-color: $blue;
-    border-color: darken($blue, 5%);
-    color: $white;
-
-    &:not(.disabled):not(:disabled) {
-      &:focus, &:hover {
-        background-color: lighten($blue, $btnColorChange);
-      }
-      &:active {
-        background-color: darken($blue, $btnColorChange);
-      }
-    }
-  }
+button.default,
+button.submit {
+  @extend .button;
+  @include buttonEffects($green);
 }
 
 input {
@@ -110,7 +125,7 @@ input[type="checkbox"], input[type="radio"] {
     }
   }
 
-  @include blueFocus();
+  // @include blueFocus();
 
   & + label {
     margin-left: 4px;
