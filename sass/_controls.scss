@@ -55,6 +55,7 @@ $btnBgDelta:          7%;
   &:not(.disabled):not(:disabled) {
     &:focus, &:hover {
       background-color: lighten($bgColor, $btnBgDelta);
+      outline: none;
     }
     &:active {
       background-color: darken($bgColor, $btnBgDelta);
@@ -79,18 +80,18 @@ button {
 }
 
 button.action {
-  @extend .button;
+  @extend %button;
   @include buttonEffects($blue);
 }
 
 button.primary {
-  @extend .button;
+  @extend %button;
   @include buttonEffects($red);
 }
 
 button.default,
 button.submit {
-  @extend .button;
+  @extend %button;
   @include buttonEffects($green);
 }
 
