@@ -7,7 +7,7 @@ $controlFontSize:     13px !default;
 $controlHeight:       27px !default;
 
 %control {
-  font-family: 'Roboto', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+  font-family: $fontFamily;
   font-size: 13px;
   font-weight: 500;
   line-height: $controlHeight;
@@ -17,13 +17,6 @@ $controlHeight:       27px !default;
     opacity: 0.5;
   }
 }
-
-// @mixin blueFocus() {
-//   &:focus {
-//     border-color: $blue;
-//     outline: 4px solid #c2daff;
-//   }
-// }
 
 .buttonbar {
   @include display-flex();
@@ -98,6 +91,7 @@ button.submit {
 
 input {
   border: 1px solid $lineColor;
+  font-family: $fontFamily;
   font-size: inherit;
   line-height: $controlHeight - 4px;
   padding: 2px;
@@ -127,8 +121,6 @@ input[type="checkbox"], input[type="radio"] {
       background-color: $grayLighter;
     }
   }
-
-  // @include blueFocus();
 
   & + label {
     margin-left: 4px;

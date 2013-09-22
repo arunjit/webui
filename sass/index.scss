@@ -1,1 +1,6 @@
 @import "controls";
+@import "vars";
+
+body {
+  font-family: $fontFamily;
+}
