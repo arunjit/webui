@@ -89,16 +89,24 @@ button.submit {
   @include buttonEffects($green);
 }
 
+@mixin inlineInput() {
+  display: inline-block;
+  vertical-align: middle;
+}
+
 input {
+  @include inlineInput();
   border: 1px solid $lineColor;
   font-family: $fontFamily;
   font-size: inherit;
   line-height: $controlHeight - 4px;
   padding: 2px;
 
-  &:focus {
-    border-color: $blue;
-    outline: none;
+  &:not(.disabled):not(:disabled) {
+    &:focus {
+      border-color: $blue;
+      outline: none;
+    }
   }
 }
 
@@ -113,13 +121,14 @@ input[type="checkbox"], input[type="radio"] {
   position: relative;
 
   &:not(.disabled):not(:disabled) {
-    &:focus, &:hover {
-      background-color: $grayLightest;
-      @include box-shadow(inset 0 1px 1px $shadow1);
-    }
     &:active {
+      @include box-shadow(inset 0 1px 1px $shadow1);
       background-color: $grayLighter;
     }
+  }
+
+  &, & + label {
+    @include inlineInput();
   }
 
   & + label {

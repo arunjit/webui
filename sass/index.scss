@@ -4,3 +4,11 @@
 body {
   font-family: $fontFamily;
 }
+
+%section {
+  margin: 1.5em 0;
+}
+
+.inputs, .buttons {
+  @extend %section;
+}
